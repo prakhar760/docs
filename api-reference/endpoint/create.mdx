@@ -1,0 +1,67 @@
+---
+title: 'Create Phone Call'
+description: 'Endpoint to create a phone call with your choice of voice ai provider.'
+openapi: 'POST /create_phobe_call/{id}'
+---
+
+
+## API Details
+
+- **URL**: `/create_phone_call`
+- **Method**: `POST`
+
+## Request Body
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the AI agent to use for the call |
+| `callee_data` | array | Array of objects containing call recipient information |
+
+
+### `Request Body` Object Structure Example
+
+```json
+{
+    agent_id: 'your_agent_id',
+    callee_data: [
+      {
+        name: 'John Doe',
+        country: 'USA',
+        to_number: '+1234567890'
+      }
+```
+
+## Response
+
+### Success Response
+
+- **Code**: 201
+- **Content**: 
+```json
+{
+  "message": "Phone call created successfully"
+}
+```
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "No entries provided"
+}
+```
+- **Content**: 
+```json
+{
+  "message": "Missing required attributes: [attribute1, attribute2, ...]"
+}
+```
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "message": "Agent not found"
+}
+```
