@@ -1,0 +1,107 @@
+---
+title: 'Update Agent'
+description: 'Endpoint to update an existing Voice AI agent'
+---
+
+## API Details
+
+- **URL**: `/update_agent/<agent_id>`
+- **Method**: `PATCH`
+- **Auth Required**: Yes (API key required for Retell)
+
+## Path Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent to update |
+
+## Request Body
+
+The request body can include the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `agent_name` | string | (Optional) New name for the agent |
+| `config` | object | (Optional) Updated configuration for the agent |
+
+### `config` Object Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `prompt` | string | The updated prompt for the AI |
+| `llmmodel` | string | The updated language model to use |
+| `voice_id` | string | The updated voice ID |
+| `begin_message` | string | The updated initial message |
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**: 
+```json
+{
+  "message": "Agent updated successfully"
+}
+```
+### Error Responses
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "agent_id is required"
+}
+```
+```json
+{
+  "message": "no data provided"
+}
+```
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "message": "No agents found for this company_id"
+}
+```
+
+### Example Usage
+
+### cURL
+
+```curl
+curl -X PATCH 'https://your-api-url.com/update_agent/<your-agent-id>' \
+-d '{
+  "agent_name": "Updated Agent Name",
+  "config": {
+    "prompt": "Updated prompt text",
+    "llmmodel": "gpt-4",
+    "voice_id": "new-voice-id",
+    "begin_message": "Updated greeting message"
+  }
+}'
+```
+
+### Python
+
+```python
+import requests
+import json
+
+url = "https://your-api-url.com/update_agent/your-agent-id"
+
+payload = json.dumps({
+  "agent_name": "Updated Agent Name",
+  "config": {
+    "prompt": "Updated prompt text",
+    "llmmodel": "gpt-4",
+    "voice_id": "new-voice-id",
+    "begin_message": "Updated greeting message"
+  }
+})
+
+response = requests.request("PATCH", url, data=payload)
+
+print(response.text)
+```
