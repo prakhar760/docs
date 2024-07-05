@@ -18,6 +18,19 @@ description: 'Endpoint to create a phone call using your choice of call agent pr
 
 ### `callee_data` Object Structure Example
 
+```json
+{
+    "agent_id": "agentID123",
+    "callee_data": [
+        {
+            "student_name": "John Doe",
+            "country_name": "Canada",
+            "to_number": "+91222"
+        }
+    ]
+}
+```
+
 | Field | Type | Description |
 |-------|------|-------------|
 | `student_name` | string | Name of the student |
