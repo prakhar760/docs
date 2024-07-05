@@ -1,0 +1,35 @@
+---
+title: 'Get Agents'
+description: 'Endpoint to retrieve all active Voice AI agents'
+---
+
+## API Details
+
+- **URL**: `/agents/<company_id>`
+- **Method**: `GET`
+
+## Path Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `company_id` | string | The ID of the company to fetch agents for |
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**: 
+```json
+{
+  "agents": [
+    {
+      "agent_id": "uuid-of-agent",
+      "agent_name": "Agent Name",
+      "config": {
+        // Configuration object of the agent
+      }
+    },
+    // ... more agents
+  ]
+}

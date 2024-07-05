@@ -1,0 +1,75 @@
+---
+title: 'Create Voice Agent'
+description: 'Endpoint to create a new Voice AI agent'
+---
+
+
+## API Details
+
+- **URL**: `/create_voice_agent`
+- **Method**: `POST`
+
+## Request Body
+
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|---------|
+| `provider` | string | The AI provider (currently only supports 'retell') | 'voice_agent1' |
+| `agent_name` | string | Name of the AI agent | 'VoiceAIagent' |
+| `prompt` | string | The initial prompt for the AI | You are Nancy, a sophisticated AI voice agent. Your goals are to identify their needs, provide information, guide them. Maintain a polite, respectful, and empathetic tone throughout the interaction. |
+| `llmmodel` | string | The language model to use | 'gpt-3.5-turbo' |
+| `begin_message` | string | The initial message the AI will use | 'Hello' |
+| `voice_id` | string | ID of the voice to use | 'custom-Shanaya' |
+| `company_id` | string | ID of the company associated with this agent | companyid123 |
+
+
+## Response
+
+### Success Response
+
+- **Code**: 201
+- **Content**: 
+```json
+{
+  "agent_id": "generated-uuid-for-agent"
+}
+```
+
+## Example Usage
+
+### cURL
+
+```bash
+curl -X POST 'https://your-api-url.com/create_voice_agent' \
+-d '{
+  "provider": "retell",
+  "agent_name": "CustomAgent",
+  "prompt": "Your custom prompt here",
+  "llmmodel": "gpt-3.5-turbo",
+  "begin_message": "Greetings!",
+  "voice_id": "custom-Shanaya",
+  "company_id": "your-company-id"
+}'
+```
+
+### Python
+
+```python
+import requests
+import json
+
+url = "https://your-api-url.com/create_voice_agent"
+
+payload = json.dumps({
+  "provider": "VoiceAgent1",
+  "agent_name": "CustomAgent",
+  "prompt": "Your custom prompt here",
+  "llmmodel": "gpt-3.5-turbo",
+  "begin_message": "Greetings!",
+  "voice_id": "custom-Shanaya",
+  "company_id": "your-company-id"
+})
+
+response = requests.request("POST", url, data=payload)
+
+print(response.text)
+```
