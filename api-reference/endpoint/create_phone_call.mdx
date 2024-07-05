@@ -1,4 +1,57 @@
 ---
 title: 'Create Phone Call'
-openapi: 'POST /create_phone_call'
+description: 'Endpoint to create a phone call using your choice of call agent provider'
 ---
+
+## API Details
+
+- **URL**: `/create_phone_call`
+- **Method**: `POST`
+- **Auth Required**: Yes (API key required)
+
+## Request Body
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the AI agent to use for the call |
+| `callee_data` | array | Array of objects containing call recipient information |
+
+### `callee_data` Object Structure Example
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `student_name` | string | Name of the student |
+| `country_name` | string | Name of the country |
+| `to_number` | string | Recipient's phone number |
+
+## Response
+
+### Success Response
+
+- **Code**: 201
+- **Content**: 
+```json
+{
+  "message": "Phone call created successfully"
+}
+```
+### Error Response
+- **Code**: Code: 404
+- **Content**: 
+```json
+{
+  "message": "Agent not found"
+}
+```
+- **Code**: Code: 400
+- **Content**: 
+```json
+{
+  "message": "No entries provided"
+}
+```
+```json
+{
+  "message": "Missing required attributes: [attribute1, attribute2, ...]"
+}
+```
