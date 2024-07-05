@@ -1,0 +1,65 @@
+---
+title: 'Delete Agent'
+description: 'Endpoint to soft delete a Voice AI agent. This endpoint allows you to soft delete a Voice AI agent by setting its `is_active` status to "no"'
+---
+
+## API Details
+
+- **URL**: `/agents/<agent_id>`
+- **Method**: `DELETE`
+
+## Path Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent to delete |
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**: 
+```json
+{
+  "message": "Agent <agent_id> has been deleted"
+}
+```
+
+### Error Responses
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "agent_id is required"
+}
+```
+
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "message": "No agents found for this company_id"
+}
+```
+
+### Example Usage
+
+### cURL
+
+```curl
+curl -X DELETE 'https://your-api-url.com/agents/<your-agent-id>'
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://your-api-url.com/agents/your-agent-id"
+
+response = requests.delete(url)
+
+print(response.json())
+```
