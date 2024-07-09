@@ -54,8 +54,8 @@
     {
       "group": "Essentials",
       "pages": [
-        "api-reference/voice_ai/create_phone_call",
-        "api-reference/voice_ai/create_voice_agent",
+        "api-reference/endpoint/voice_ai/create_phone_call",
+        "api-reference/endpoint/voice_ai/create_voice_agent",
         "essentials/images",
         "essentials/settings",
         "essentials/navigation",
