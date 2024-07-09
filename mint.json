@@ -12,74 +12,39 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:prakhar.singh@uniacco.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Openllmhub",
+    "url": "https://www.openllmhub.com"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference/endpoint/voice_ai"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "Your Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://uniacco.mintlify.app/api-reference/endpoint/voice-ai"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Your API Docs",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "api-reference/endpoint/voice_ai/create_phone_call",
-        "api-reference/endpoint/voice_ai/create_voice_agent",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "authentication",
+        "endpoints/voice_ai"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/your-handle",
+    "github": "https://github.com/your-org",
+    "linkedin": "https://www.linkedin.com/company/your-company"
   }
 }
