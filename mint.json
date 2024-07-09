@@ -1,10 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
@@ -60,8 +54,8 @@
     {
       "group": "Essentials",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
+        "api-reference/voice_ai/create_phone_call",
+        "api-reference/voice_ai/create_voice_agent",
         "essentials/images",
         "essentials/settings",
         "essentials/navigation",
