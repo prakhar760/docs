@@ -41,6 +41,12 @@
         "api-reference/endpoint/voice_ai/update_agent",
         "api-reference/endpoint/voice_ai/voiceai_execution_logs"
       ]
+    },
+    {
+      "group": "Call Analysis",
+      "pages": [
+        "api-reference/endpoint/voice_ai/get_agents"
+      ]
     }
   ],
   "footerSocials": {

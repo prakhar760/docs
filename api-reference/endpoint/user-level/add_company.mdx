@@ -1,0 +1,122 @@
+---
+title: 'Add Company'
+description: 'Endpoint to add a new company to the system'
+openapi: 'POST /add_company'
+---
+
+## API Details
+
+- **URL**: `/add_company`
+- **Method**: `POST`
+- **Auth Required**: No
+
+## Request Body
+
+The request body should be in JSON format and include the following fields:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `company_name` | string | Yes | Name of the company |
+| `spoc_name` | string | Yes | Name of the Single Point of Contact (SPOC) |
+| `spoc_phone` | string | No | Phone number of the SPOC |
+| `spoc_title` | string | No | Title of the SPOC |
+| `email` | string | No | Email address for the company |
+| `app_data` | object | No | Additional application data (see below) |
+
+### `app_data` Object Structure
+
+If not provided, default values will be used.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `baseurl` | string | "https://unischolars.com/api/v1/crm/calls/call-log-v2/" | Base URL for API calls |
+| `img` | string | "uniacco.imgix.net/site-static/v2/uniacco/logo.svg" | URL for company logo |
+| `custom_domain` | string | "unischolarz.com" | Custom domain for the company |
+| `name` | string | "UniScholars" | Display name for the application |
+
+## Response
+
+### Success Response
+
+- **Code**: 201
+- **Content**: 
+```json
+{
+  "status": "success",
+  "message": "Company added successfully!",
+  "token": "generated-jwt-token"
+}
+```
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "company Name and spoc name are required"
+}
+```
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Company name or email already exists"
+}
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+```
+
+### cURL
+
+```bash
+curl -X POST 'https://your-api-url.com/add_company' \
+-H 'Content-Type: application/json' \
+-d '{
+  "company_name": "Acme Corp",
+  "spoc_name": "John Doe",
+  "spoc_phone": "+1234567890",
+  "spoc_title": "CTO",
+  "email": "john@acmecorp.com",
+  "app_data": {
+    "custom_domain": "acmecorp.com",
+    "name": "Acme Portal"
+  }
+}'
+```
+
+### Python 
+
+```python
+import requests
+import json
+
+url = "https://your-api-url.com/add_company"
+
+payload = json.dumps({
+  "company_name": "Acme Corp",
+  "spoc_name": "John Doe",
+  "spoc_phone": "+1234567890",
+  "spoc_title": "CTO",
+  "email": "john@acmecorp.com",
+  "app_data": {
+    "custom_domain": "acmecorp.com",
+    "name": "Acme Portal"
+  }
+})
+headers = {
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
