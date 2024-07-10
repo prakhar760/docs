@@ -1,26 +1,41 @@
 ---
 title: 'Create Voice Agent'
 description: 'Endpoint to create a new Voice AI agent'
+openapi: 'POST /create_voice_agent'
 ---
-
 
 ## API Details
 
 - **URL**: `/create_voice_agent`
 - **Method**: `POST`
+- **`company_id` required**
 
 ## Request Body
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `provider` | string | The AI provider (currently only supports 'retell') | 'voice_agent1' |
-| `agent_name` | string | Name of the AI agent | 'VoiceAIagent' |
-| `prompt` | string | The initial prompt for the AI | You are Nancy, a sophisticated AI voice agent. Your goals are to identify their needs, provide information, guide them. Maintain a polite, respectful, and empathetic tone throughout the interaction. |
-| `llmmodel` | string | The language model to use | 'gpt-3.5-turbo' |
-| `begin_message` | string | The initial message the AI will use | 'Hello' |
-| `voice_id` | string | ID of the voice to use | 'custom-Shanaya' |
-| `company_id` | string | ID of the company associated with this agent | companyid123 |
+The request body should be in JSON format. All fields are optional except for `agent_name`. Default values will be used for missing fields.
 
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `provider` | string | 'retell' | The provider for the voice agent |
+| `agent_name` | string | - | Name of the agent (Required) |
+| `prompt` | string | (see notes) | The prompt for the AI |
+| `llmmodel` | string | 'gpt-3.5-turbo' | The language model to use |
+| `begin_message` | string | 'Hello' | The initial message |
+| `voice_id` | string | 'custom-Shanaya' | The voice ID to use |
+| `voice_temperature` | number | 1 | Voice temperature setting |
+| `voice_speed` | number | 1 | Voice speed setting |
+| `responsiveness` | number | 1 | Responsiveness setting |
+| `interruption_sensitivity` | number | 1 | Interruption sensitivity setting |
+| `enable_backchannel` | boolean | false | Enable backchannel feature |
+| `backchannel_frequency` | number | 0.80 | Backchannel frequency |
+| `backchannel_words` | array | ["okay", "yeah"] | Backchannel words |
+| `reminder_trigger_ms` | number | 10000 | Reminder trigger time in milliseconds |
+| `reminder_max_count` | number | 2 | Maximum reminder count |
+| `ambient_sound` | string | "summer-outdoor" | Ambient sound setting |
+| `ambient_sound_volume` | number | 1 | Ambient sound volume |
+| `language` | string | "en-US" | Language setting |
+| `boosted_keywords` | array | [] | Boosted keywords |
+| `end_call_after_silence_ms` | number | 600000 | End call after silence duration in milliseconds |
 
 ## Response
 
@@ -30,7 +45,16 @@ description: 'Endpoint to create a new Voice AI agent'
 - **Content**: 
 ```json
 {
-  "agent_id": "generated-uuid-for-agent"
+  "agent_id": "generated agent_id"
+}
+```
+
+### Error Response
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "No agent name provided"
 }
 ```
 
@@ -40,19 +64,17 @@ description: 'Endpoint to create a new Voice AI agent'
 
 ```bash
 curl -X POST 'https://your-api-url.com/create_voice_agent' \
+-H 'Content-Type: application/json' \
 -d '{
-  "provider": "retell",
-  "agent_name": "CustomAgent",
-  "prompt": "Your custom prompt here",
+  "agent_name": "Agent Name",
+  "prompt": "You are Nancy, an AI Agent",
   "llmmodel": "gpt-3.5-turbo",
-  "begin_message": "Greetings!",
   "voice_id": "custom-Shanaya",
-  "company_id": "your-company-id"
+  "begin_message": "Hello"
 }'
 ```
 
 ### Python
-
 ```python
 import requests
 import json
@@ -60,13 +82,11 @@ import json
 url = "https://your-api-url.com/create_voice_agent"
 
 payload = json.dumps({
-  "provider": "VoiceAgent1",
-  "agent_name": "CustomAgent",
-  "prompt": "Your custom prompt here",
+  "agent_name": "Agent Name",
+  "prompt": "You are Nancy, an AI Agent",
   "llmmodel": "gpt-3.5-turbo",
-  "begin_message": "Greetings!",
   "voice_id": "custom-Shanaya",
-  "company_id": "your-company-id"
+  "begin_message": "Hello"
 })
 
 response = requests.request("POST", url, data=payload)

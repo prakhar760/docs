@@ -1,0 +1,106 @@
+---
+title: 'Get Voice AI Logs'
+description: 'Endpoint to retrieve Voice AI execution logs for a company'
+openapi: 'GET /voice_ai_logs'
+---
+
+## API Details
+
+- **URL**: `/voice_ai_logs`
+- **Method**: `GET`
+- **`company_id` Required**
+
+## Request Body
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `company_id` | string | The ID of the company to fetch agents for. |
+
+```json
+{
+    "company_id": "Company_ID12"
+}
+```
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**: 
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "call_id": "string",
+      "provider_call_id": "string",
+      "agent_id": "string",
+      "agent_name": "string",
+      "timestamp": "string",
+      "transcript": "string",
+      "recording_url": "string",
+      "call_summary": "string",
+      "disconnection_reason": "string",
+      "to_number": "string",
+      "from_number": "string",
+      "call_status": "string"
+    },
+    // ... more log entries
+  ]
+}
+```
+
+### Response fields
+
+| Field | Type | Description |
+|--------|------|-------------|
+| `call_id` | string | Unique identifier for the call |
+| `provider_call_id` | string | Call ID from the service provider |
+| `agent_id` | string | ID of the Voice AI agent |
+| `agent_name` | string | Name of the Voice AI agent |
+| `timestamp` | string | Start and End Timestamp of the log entry |
+| `transcript` | string | Transcript of the call |
+| `recording_url` | string | URL to access the call recording |
+| `call_summary` | string | Summary of the call |
+| `disconnection_reason` | string | Reason for call disconnection |
+| `to_number` | string | Recipient's phone number |
+| `from_number` | string | Caller's phone number |
+| `call_status` | string | Status of the call |
+
+### Error Response
+
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "error",
+  "message": "Error message description"
+}
+```
+
+
+## Example Usage
+
+### cURL
+
+```bash
+curl -X GET "https://your-api-url.com/voice_ai_logs" \
+-H "Content-Type: application/json" \
+-d '{"company_id": "your company id"}'
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://your-api-url.com/voice_ai_logs"
+data = {
+    "company_id": "your company id"
+}
+
+response = requests.get(url, json=data)
+
+print(response.json())
+```

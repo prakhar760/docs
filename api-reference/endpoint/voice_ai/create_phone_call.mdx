@@ -1,8 +1,8 @@
 ---
 title: 'Create Phone Call'
-description: 'Endpoint to create a phone call with your choice of voice ai provider.'
+description: 'Endpoint to initiate a phone call using a Voice AI agent'
+openapi: 'POST /create_phone_call'
 ---
-
 
 ## API Details
 
@@ -11,24 +11,21 @@ description: 'Endpoint to create a phone call with your choice of voice ai provi
 
 ## Request Body
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `agent_id` | string | The ID of the AI agent to use for the call |
-| `callee_data` | array | Array of objects containing call recipient information |
+The request body should be in JSON format and include the following fields:
 
+| Field | Type | Description |
+|-------|------|-------------|
+| `agent_id` | string | ID of the Voice AI agent to use for the call |
+| `callee_data` | array | Array of objects containing information for each call recipient |
 
-### `Request Body` Object Structure Example
+### `callee_data` Object Structure
 
-```json
-{
-    agent_id: 'your_agent_id',
-    callee_data: [
-      {
-        name: 'John Doe',
-        country: 'USA',
-        to_number: '+1234567890'
-      }
-```
+Each object in the `callee_data` array should include:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `to_number` | string | The phone number to call |
+| ... | varies | Additional fields as required by the agent's dynamic variables |
 
 ## Response
 
@@ -48,13 +45,17 @@ description: 'Endpoint to create a phone call with your choice of voice ai provi
 - **Content**: 
 ```json
 {
+  "message": "No agent id provided"
+}
+```
+```json
+{
   "message": "No entries provided"
 }
 ```
-- **Content**: 
 ```json
 {
-  "message": "Missing required attributes: [attribute1, attribute2, ...]"
+  "message": "Missing required attributes or empty values: [attribute1, attribute2, ...]"
 }
 ```
 - **Code**: 404
@@ -63,4 +64,50 @@ description: 'Endpoint to create a phone call with your choice of voice ai provi
 {
   "message": "Agent not found"
 }
+```
+
+## Example Usage
+
+### cURL
+
+```json
+curl -X POST 'https://your-api-url.com/create_phone_call' \
+-H 'Content-Type: application/json' \
+-d '{
+  "agent_id": "your-agent-id",
+  "callee_data": [
+    {
+      "to_number": "+1234567890",
+      "name": "John Doe",
+      "country": "India"
+    },
+  ///...
+  ]
+}'
+```
+### Python
+
+```python
+import requests
+import json
+
+url = "https://your-api-url.com/create_phone_call"
+
+payload = json.dumps({
+  "agent_id": "your-agent-id",
+  "callee_data": [
+    {
+      "to_number": "+1234567890",
+      "name": "John Doe",
+      "country": "India"
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```

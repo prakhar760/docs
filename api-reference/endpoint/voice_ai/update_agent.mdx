@@ -1,13 +1,13 @@
 ---
 title: 'Update Agent'
 description: 'Endpoint to update an existing Voice AI agent'
+openapi: 'PATCH /update_agent/{agent_id}'
 ---
 
 ## API Details
 
-- **URL**: `/update_agent/<agent_id>`
+- **URL**: `/update_agent/{agent_id}`
 - **Method**: `PATCH`
-- **Auth Required**: Yes (API key required for Retell)
 
 ## Path Parameters
 
@@ -23,6 +23,7 @@ The request body can include the following fields:
 |-------|------|-------------|
 | `agent_name` | string | (Optional) New name for the agent |
 | `config` | object | (Optional) Updated configuration for the agent |
+| `additional_setting` | object | (Optional) Additional settings for the agent |
 
 ### `config` Object Structure
 
@@ -32,6 +33,25 @@ The request body can include the following fields:
 | `llmmodel` | string | The updated language model to use |
 | `voice_id` | string | The updated voice ID |
 | `begin_message` | string | The updated initial message |
+
+### `additional_setting` Object Structure
+
+Can include any of the following fields:
+
+- `voice_temperature`
+- `voice_speed`
+- `responsiveness`
+- `interruption_sensitivity`
+- `enable_backchannel`
+- `backchannel_frequency`
+- `backchannel_words`
+- `reminder_trigger_ms`
+- `reminder_max_count`
+- `ambient_sound`
+- `ambient_sound_volume`
+- `language`
+- `boosted_keywords`
+- `end_call_after_silence_ms`
 
 ## Response
 
@@ -44,10 +64,11 @@ The request body can include the following fields:
   "message": "Agent updated successfully"
 }
 ```
-### Error Responses
+
+### Error Response
 
 - **Code**: 400
-- **Content**: 
+- **Content**:
 ```json
 {
   "message": "agent_id is required"
@@ -55,36 +76,39 @@ The request body can include the following fields:
 ```
 ```json
 {
-  "message": "no data provided"
+  "error": "no data provided"
 }
 ```
+
 - **Code**: 404
-- **Content**: 
+- **Content**:
 ```json
 {
-  "message": "No agents found for this company_id"
+  "message": "No agents found for this agent_id"
 }
 ```
 
-### Example Usage
+## Example Usage
 
 ### cURL
-
-```curl
-curl -X PATCH 'https://your-api-url.com/update_agent/<your-agent-id>' \
+```bash
+curl -X PATCH 'https://your-api-url.com/update_agent/your-agent-id' \
+-H 'Content-Type: application/json' \
 -d '{
   "agent_name": "Updated Agent Name",
   "config": {
-    "prompt": "Updated prompt text",
+    "prompt": "New prompt text",
     "llmmodel": "gpt-4",
     "voice_id": "new-voice-id",
-    "begin_message": "Updated greeting message"
+    "begin_message": "New greeting message"
+  },
+  "additional_setting": {
+    "voice_speed": 1.2,
+    "responsiveness": 0.8
   }
 }'
 ```
-
 ### Python
-
 ```python
 import requests
 import json
@@ -94,14 +118,21 @@ url = "https://your-api-url.com/update_agent/your-agent-id"
 payload = json.dumps({
   "agent_name": "Updated Agent Name",
   "config": {
-    "prompt": "Updated prompt text",
+    "prompt": "New prompt text",
     "llmmodel": "gpt-4",
     "voice_id": "new-voice-id",
-    "begin_message": "Updated greeting message"
+    "begin_message": "New greeting message"
+  },
+  "additional_setting": {
+    "voice_speed": 1.2,
+    "responsiveness": 0.8
   }
 })
+headers = {
+  'Content-Type': 'application/json'
+}
 
-response = requests.request("PATCH", url, data=payload)
+response = requests.request("PATCH", url, headers=headers, data=payload)
 
 print(response.text)
 ```

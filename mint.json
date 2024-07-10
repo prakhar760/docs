@@ -1,50 +1,50 @@
 {
-  "favicon": "/favicon.svg",
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Open LLM Hub",
+
+  "favicon": "favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#0056b3",
+    "light": "#4a90e2",
+    "dark": "#003366",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#0056b3",
+      "to": "#007bff"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "mailto:prakhar.singh@uniacco.com"
-    }
-  ],
+
   "topbarCtaButton": {
-    "name": "Openllmhub",
-    "url": "https://www.openllmhub.com"
+    "name": "Dashboard",
+    "url": "https://adminpanel.openllmhub.com/"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference/endpoint/voice_ai"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Your Documentation",
-      "icon": "book-open-cover",
-      "url": "https://uniacco.mintlify.app/api-reference/endpoint/voice-ai"
+      "url": "api-reference"
     }
   ],
   "navigation": [
     {
-      "group": "Your API Docs",
+      "group": "Get Started",
       "pages": [
         "introduction",
-        "authentication",
-        "endpoints/voice_ai"
+        "quickstart"
+      ]
+    },
+    {
+      "group": "Voice AI",
+      "pages": [
+        "api-reference/endpoint/voice_ai/create_voice_agent",
+        "api-reference/endpoint/voice_ai/create_phone_call",
+        "api-reference/endpoint/voice_ai/get_agents",
+        "api-reference/endpoint/voice_ai/get_agent_config",
+        "api-reference/endpoint/voice_ai/update_agent",
+        "api-reference/endpoint/voice_ai/voiceai_execution_logs"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/your-handle",
-    "github": "https://github.com/your-org",
-    "linkedin": "https://www.linkedin.com/company/your-company"
+    "github": "https://www.google.com",
+    "linkedin": "https://www.google.com"
   }
 }

@@ -1,0 +1,78 @@
+---
+title: 'Get Agent Configuration'
+description: 'Endpoint to retrieve configuration details for a specific Voice AI agent'
+openapi: 'GET /agent/{agent_id}'
+---
+
+## API Details
+
+- **URL**: `/agent/{agent_id}`
+- **Method**: `GET`
+- **`agent_id` required**
+
+## Path Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent to retrieve |
+
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**: 
+```json
+{
+  "config": object,
+  "agent_id": "string",
+  "agent_name": "string",
+  "additional_setting": object
+}
+```
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "agent_id is required"
+}
+```
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "message": "Agent not found"
+}
+```
+
+## Response fields
+
+| Field | Type | Description |
+|--------|------|-------------|
+| `config` | object | Unique identifier for the call |
+| `additional_setting` | object | Additional settings for the agent |
+| `agent_id` | string | ID of the Voice AI agent |
+| `agent_name` | string | Name of the Voice AI agent |
+
+## Example Usage
+
+### cURL
+
+```bash
+curl -X GET 'https://your-api-url.com/agent/your-agent-id'
+```
+### Python
+
+```python
+import requests
+
+url = "https://your-api-url.com/agent/your-agent-id"
+
+response = requests.get(url)
+
+print(response.json())
+```

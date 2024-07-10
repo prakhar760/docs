@@ -1,18 +1,14 @@
 ---
-title: 'Get Agents'
-description: 'Endpoint to retrieve all active Voice AI agents'
+title: 'Get Agents for Company'
+description: 'Endpoint to retrieve all active Voice AI agents for a company'
+openapi: 'GET /agents'
 ---
 
 ## API Details
 
-- **URL**: `/agents/<company_id>`
+- **URL**: `/agents`
 - **Method**: `GET`
-
-## Path Parameters
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `company_id` | string | The ID of the company to fetch agents for |
+- **`company_id` required**
 
 ## Response
 
@@ -24,12 +20,59 @@ description: 'Endpoint to retrieve all active Voice AI agents'
 {
   "agents": [
     {
-      "agent_id": "uuid-of-agent",
-      "agent_name": "Agent Name",
-      "config": {
-        // Configuration object of the agent
-      }
+      "agent_id": "string",
+      "agent_name": "string"
     },
     // ... more agents
   ]
 }
+```
+
+### Error Response
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "message": "company_id is required"
+}
+```
+
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "message": "No agents found for this company_id"
+}
+```
+
+## Response fields
+
+| Field | Type | Description |
+|--------|------|-------------|
+| `agent_id` | string | ID of the Voice AI agent |
+| `agent_name` | string | Name of the Voice AI agent |
+
+## Example Usage
+
+### cURL
+
+```bash
+curl -X GET 'https://your-api-url.com/agents' \
+-H "Content-Type: application/json" \
+-d '{"company_id": "your company id"}'
+```
+
+### Python
+
+```python
+import requests
+
+url = "https://your-api-url.com/agents"
+data = {
+    "company_id": "your company id"
+}
+
+response = requests.get(url, json=data)
+
+print(response.json())
+```
