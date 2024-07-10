@@ -70,8 +70,8 @@ Each object in the `callee_data` array should include:
 
 ### cURL
 
-```json
-curl -X POST 'https://your-api-url.com/create_phone_call' \
+```bash
+curl -X POST 'https://api.openllmhub.com/create_phone_call' \
 -H 'Content-Type: application/json' \
 -d '{
   "agent_id": "your-agent-id",
@@ -91,7 +91,7 @@ curl -X POST 'https://your-api-url.com/create_phone_call' \
 import requests
 import json
 
-url = "https://your-api-url.com/create_phone_call"
+url = "https://api.openllmhub.com/create_phone_call"
 
 payload = json.dumps({
   "agent_id": "your-agent-id",

@@ -92,7 +92,7 @@ Can include any of the following fields:
 
 ### cURL
 ```bash
-curl -X PATCH 'https://your-api-url.com/update_agent/your-agent-id' \
+curl -X PATCH 'https://api.openllmhub.com/update_agent/your-agent-id' \
 -H 'Content-Type: application/json' \
 -d '{
   "agent_name": "Updated Agent Name",
@@ -113,7 +113,7 @@ curl -X PATCH 'https://your-api-url.com/update_agent/your-agent-id' \
 import requests
 import json
 
-url = "https://your-api-url.com/update_agent/your-agent-id"
+url = "https://api.openllmhub.com/update_agent/your-agent-id"
 
 payload = json.dumps({
   "agent_name": "Updated Agent Name",
