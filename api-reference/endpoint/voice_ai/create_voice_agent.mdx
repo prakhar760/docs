@@ -67,6 +67,7 @@ The request body should be in JSON format. All fields are optional except for `a
 curl -X POST 'https://your-api-url.com/create_voice_agent' \
 -H 'Content-Type: application/json' \
 -d '{
+  "company_id": "companyid",
   "agent_name": "Agent Name",
   "prompt": "You are Nancy, an AI Agent",
   "llmmodel": "gpt-3.5-turbo",
@@ -83,6 +84,7 @@ import json
 url = "https://your-api-url.com/create_voice_agent"
 
 payload = json.dumps({
+  "company_id": "companyid",
   "agent_name": "Agent Name",
   "prompt": "You are Nancy, an AI Agent",
   "llmmodel": "gpt-3.5-turbo",
