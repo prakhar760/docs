@@ -1,0 +1,166 @@
+---
+title: 'Add Agent'
+description: 'Endpoint to add a new agent to the system'
+openapi: 'POST https://api.openllmhub.com/ui_routes/add_agent'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/ui_routes/add_agent`
+- **Method**: `POST`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Request Body
+
+The request body should be in JSON format and include the following fields:
+
+| Field               | Type   | Required | Description                                 |
+|---------------------|--------|----------|---------------------------------------------|
+| `agent_name`        | string | Yes      | Name of the agent                           |
+| `configuration_log` | object | No       | Configuration details for the agent         |
+
+### `configuration_log` Object Structure
+
+If not provided, default values will be used.
+
+| Field           | Type   | Default | Description                            |
+|-----------------|--------|---------|----------------------------------------|
+| `prompt`        | string | See below | Detailed prompt for agent performance evaluation |
+| `llmmodel`      | string | "nova-2" | Model to be used for analysis          |
+| `language`      | string | "hi"     | Language for the analysis              |
+
+**Default Prompt:**
+Agent Performance Evaluation Summary
+Information Extraction
+
+Lead Details: Extract and verify information such as name, contact details, interest area, intended service or product, and timeline.
+Needs Assessment: Discuss and confirm the lead's requirements, preferences, and goals.
+Background Information: Gather relevant background details, such as previous experiences, qualifications, or purchase history.
+Session or Appointment Status: Status of scheduling any required session, meeting, or follow-up appointment.
+Script Follow Analysis
+
+Introduction and Verification: Agent successfully verified the lead's identity and explained the purpose of the call clearly.
+Inquiry Confirmation: Confirm details of the lead's interest and the relevant service or product offering.
+Background and Qualifications: Collect accurate information related to the leads background or qualifications.
+Needs and Financial Planning: Discuss needs, preferences, and any financial considerations clearly.
+Document or Information Verification and Closing: Request necessary documents or information and conclude the call effectively.
+Sales Pitch Analysis
+
+Personal Address and Context Establishment: Use the lead's name effectively and reference any previous communications.
+Interest Confirmation and Benefits Highlight: Confirm interest and highlight the benefits of the service or product.
+Urgency and Offers: Create urgency about deadlines or special offers.
+Payment Process and Commitment Encouragement: Discuss payment options and encourage scheduling detailed sessions or making a commitment.
+Overall Recommendations
+
+Ensure Clarity: Maintain clarity throughout the call.
+Address Specific Concerns: Directly address the lead's specific concerns and questions.
+Follow Up: Follow up promptly on commitments and information requests.
+Offer Additional Information: Proactively provide information on relevant additional services or benefits.
+Scores and Actions
+
+Script Follow Score: Calculate based on the completeness and accuracy in following the script.
+Sales Pitch Score: Assess based on how effectively the agent pitched the services and addressed the lead's potential concerns.
+
+
+## Response
+
+### Success Response
+
+- **Code**: 201
+- **Content**:
+```json
+{
+  "status": "success",
+  "message": "Agent 'agent_name' added successfully!",
+  "agent_id": "generated-agent-id"
+}
+
+
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Agent with the given name already exists under this company"
+}
+```
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Invalid authorization type"
+}
+
+```
+- **Code**: 404
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Company with given UUID does not exist"
+}
+```
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+```
+
+### cURL
+
+```bash
+curl -X POST 'https://api.openllmhub.com/ui_routes/add_agent' \
+-H 'Authorization: Bearer your-token' \
+-H 'Content-Type: application/json' \
+-d '{
+  "agent_name": "Jane Doe",
+  "configuration_log": {
+    "prompt": "Your custom prompt",
+    "llmmodel": "nova-2",
+    "language": "hi"
+  }
+}'
+
+```
+
+### Python 
+
+```python
+import requests
+import json
+
+url = "https://api.openllmhub.com/ui_routes/add_agent"
+payload = json.dumps({
+  "agent_name": "Jane Doe",
+  "configuration_log": {
+    "prompt": "Your custom prompt",
+    "llmmodel": "nova-2",
+    "language": "hi"
+  }
+})
+headers = {
+  'Authorization': 'Bearer your-token',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+```

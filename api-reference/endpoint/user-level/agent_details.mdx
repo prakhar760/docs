@@ -1,0 +1,109 @@
+---
+title: 'Get Agent Details'
+description: 'Endpoint to retrieve details of a specific agent'
+openapi: 'GET https://api.openllmhub.com/analysis_routes/agent/{agent_id}'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/analysis_routes/agent/{agent_id}`
+- **Method**: `GET`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description            |
+|------------|--------|----------|------------------------|
+| `agent_id` | string | Yes      | The ID of the agent to retrieve |
+
+## Responses
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+{
+  "agent_id": "string",
+  "agent_name": "string",
+  "configuration_log": {
+    "prompt": "string",
+    "llmmodel": "string",
+    "language": "string"
+  },
+  "created_at": "string",
+  "updated_at": "string"
+}
+
+
+### Error Response
+
+
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Invalid authorization type"
+}
+
+
+```
+
+- **Code**: 404
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Agent not found"
+}
+
+
+
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+
+
+
+```
+
+### cURL
+
+```bash
+curl -X GET 'https://api.openllmhub.com/analysis_routes/agent/agent_id' \
+-H 'Authorization: Bearer your-token'
+
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://api.openllmhub.com/analysis_routes/agent/agent_id"
+headers = {
+  'Authorization': 'Bearer your-token'
+}
+
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+
+
+
+```

@@ -1,0 +1,128 @@
+---
+title: 'Edit Agent'
+description: 'Endpoint to edit an existing agent in the system'
+openapi: 'POST https://api.openllmhub.com/ui_routes/edit_agent/{agent_id}'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/ui_routes/edit_agent/{agent_id}`
+- **Method**: `POST`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description                |
+|------------|--------|----------|----------------------------|
+| `agent_id` | string | Yes      | The ID of the agent to edit |
+
+## Request Body
+
+The request body should be in JSON format and include the following fields:
+
+| Field               | Type   | Required | Description                                 |
+|---------------------|--------|----------|---------------------------------------------|
+| `agent_name`        | string | Yes      | Name of the agent                           |
+| `configuration_log` | object | No       | Configuration details for the agent         |
+
+## Response
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+{
+  "status": "success",
+  "message": "Agent updated successfully!"
+}
+
+
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "error": "Agent ID and agent name are required"
+}
+```
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Invalid authorization type"
+}
+```
+- **Code**: 404
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Call Analysis Agent not found"
+}
+
+```
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+
+```
+
+### cURL
+
+```bash
+curl -X POST 'https://api.openllmhub.com/ui_routes/edit_agent/agent_id' \
+-H 'Authorization: Bearer your-token' \
+-H 'Content-Type: application/json' \
+-d '{
+  "agent_name": "New Agent Name",
+  "configuration_log": {
+    "prompt": "Updated prompt",
+    "llmmodel": "nova-3",
+    "language": "en"
+  }
+}'
+
+```
+
+### Python 
+
+```python
+import requests
+import json
+
+url = "https://api.openllmhub.com/ui_routes/edit_agent/agent_id"
+payload = json.dumps({
+  "agent_name": "New Agent Name",
+  "configuration_log": {
+    "prompt": "Updated prompt",
+    "llmmodel": "nova-3",
+    "language": "en"
+  }
+})
+headers = {
+  'Authorization': 'Bearer your-token',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
+```

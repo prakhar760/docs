@@ -1,0 +1,85 @@
+---
+title: 'Generate API Key'
+description: 'Endpoint to generate a new API key for the company'
+openapi: 'POST https://api.openllmhub.com/analysis_routes/generate_api_key'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/analysis_routes/generate_api_key`
+- **Method**: `POST`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Responses
+
+### Success Response
+
+- **Code**: 201
+- **Content**:
+```json
+{
+  "status": "success",
+  "api_key": "string"
+}
+
+
+
+### Error Response
+
+
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "API key limit reached. Maximum of 50 API keys per company."
+}
+
+```
+
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Server error: Error message description"
+}
+
+
+```
+
+### cURL
+
+```bash
+curl -X POST 'https://api.openllmhub.com/analysis_routes/generate_api_key' \
+-H 'Authorization: Bearer your-token' \
+-H 'Content-Type: application/json'
+
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://api.openllmhub.com/analysis_routes/generate_api_key"
+headers = {
+  'Authorization': 'Bearer your-token',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers)
+
+print(response.text)
+
+
+```

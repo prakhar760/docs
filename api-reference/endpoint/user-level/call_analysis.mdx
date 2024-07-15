@@ -1,0 +1,118 @@
+---
+title: 'Call Analysis'
+description: 'Endpoint to upload audio files or URLs for call analysis and receive task details'
+openapi: 'POST https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis'
+---
+
+## API Details
+
+- **URL**: `https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis`
+- **Method**: `POST`
+- **Auth Required**: No
+
+## Request Parameters
+
+The request must include the following form data and files:
+
+| Parameter         | Type     | Required | Description                                                   |
+|-------------------|----------|----------|---------------------------------------------------------------|
+| `agent_id`        | string   | Yes      | The ID of the agent for whom the call analysis is being done  |
+| `audio_files`     | file[]   | No       | Audio files to be analyzed                                    |
+| `audio_urls`      | string   | No       | JSON string containing URLs of audio files to be analyzed     |
+| `callback_url`    | string   | No       | URL to be called back with the analysis results               |
+| `voice_analysis`  | string   | No       | Flag to enable or disable voice analysis (`true` or `false`)  |
+
+### Example Request Body (Form Data)
+
+| Field            | Value                             |
+|------------------|-----------------------------------|
+| `agent_id`       | `12345`                           |
+| `audio_files`    | `[File1.mp3, File2.mp3]`          |
+| `audio_urls`     | `["https://example.com/file.mp3"]`|
+| `callback_url`   | `https://example.com/callback`    |
+| `voice_analysis` | `true`                            |
+
+## Responses
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+{
+  "status": "success",
+  "tasks": [
+    {
+      "task_name": "string",
+      "payload": {
+        "file_path": "string",
+        "callback_url": "string",
+        "agent_id": "string",
+        "unique_id": "string",
+        "voice_analysis": true
+      }
+    }
+  ]
+}
+
+
+
+### Error Response
+
+- **Code**: 400
+- **Content**: 
+```json
+{
+  "error": "Invalid JSON format for audio_urls"
+}
+
+```
+
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Server error: Error message description"
+}
+
+```
+
+### cURL
+
+```bash
+curl -X POST 'https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis' \
+-H 'Content-Type: multipart/form-data' \
+-F 'agent_id=12345' \
+-F 'audio_files=@File1.mp3' \
+-F 'audio_files=@File2.mp3' \
+-F 'audio_urls=["https://example.com/file.mp3"]' \
+-F 'callback_url=https://example.com/callback' \
+-F 'voice_analysis=true'
+
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis"
+files = {
+  'audio_files': ('File1.mp3', open('File1.mp3', 'rb')),
+  'audio_files': ('File2.mp3', open('File2.mp3', 'rb'))
+}
+data = {
+  'agent_id': '12345',
+  'audio_urls': '["https://example.com/file.mp3"]',
+  'callback_url': 'https://example.com/callback',
+  'voice_analysis': 'true'
+}
+
+response = requests.post(url, files=files, data=data)
+
+print(response.text)
+
+
+```

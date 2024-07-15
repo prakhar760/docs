@@ -1,0 +1,103 @@
+---
+title: 'Get Execution Logs for a Specific Agent'
+description: 'Endpoint to retrieve all execution logs for a specific agent'
+openapi: 'GET https://api.openllmhub.com/analysis_routes/logs/{agent_id}'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/analysis_routes/logs/{agent_id}`
+- **Method**: `GET`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Path Parameters
+
+| Parameter  | Type   | Required | Description            |
+|------------|--------|----------|------------------------|
+| `agent_id` | string | Yes      | The ID of the agent to retrieve logs for |
+
+## Responses
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+[
+  {
+    "id": "string",
+    "agent_id": "string",
+    "execution_details": "object",
+    "created_at": "string",
+    "updated_at": "string"
+  }
+]
+
+
+
+### Error Response
+
+
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Invalid authorization type"
+}
+
+```
+- **Code**: 404
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "No logs found for this agent"
+}
+
+```
+
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+
+
+```
+
+### cURL
+
+```bash
+curl -X GET 'https://api.openllmhub.com/analysis_routes/logs/agent_id' \
+-H 'Authorization: Bearer your-token'
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://api.openllmhub.com/analysis_routes/logs/agent_id"
+headers = {
+  'Authorization': 'Bearer your-token'
+}
+
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+
+
+
+```

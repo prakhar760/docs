@@ -1,0 +1,84 @@
+---
+title: 'Get Agents'
+description: 'Endpoint to retrieve a list of agents for a specific company'
+openapi: 'GET https://api.openllmhub.com/analysis_routes/agents'
+---
+
+## API Details
+
+- **URL**: `https://api.openllmhub.com/analysis_routes/agents`
+- **Method**: `GET`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Responses
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+[
+  {
+    "agent_id": "string",
+    "agent_name": "string"
+  }
+]
+
+
+
+### Error Response
+
+
+- **Code**: 403
+- **Content**: 
+```json
+{
+  "status": "failure",
+  "message": "Invalid authorization type"
+}
+
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "status": "failure",
+  "message": "Error message description"
+}
+
+
+```
+
+### cURL
+
+```bash
+curl -X GET 'https://api.openllmhub.com/analysis_routes/agents' \
+-H 'Authorization: Bearer your-token'
+
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://api.openllmhub.com/analysis_routes/agents"
+headers = {
+  'Authorization': 'Bearer your-token'
+}
+
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+
+
+```
