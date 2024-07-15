@@ -6,21 +6,9 @@ openapi: 'GET /voice_ai_logs'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/voice_ai_logs`
+- **URL**: `https://api.openllmhub.com/voice_ai/voice_ai_logs`
 - **Method**: `GET`
-- **`company_id` Required**
-
-## Request Body
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `company_id` | string | The ID of the company to fetch agents for. |
-
-```json
-{
-    "company_id": "Company_ID12"
-}
-```
+- **API KEY** `required`
 
 ## Response
 
@@ -85,9 +73,9 @@ openapi: 'GET /voice_ai_logs'
 ### cURL
 
 ```bash
-curl -X GET "https://api.openllmhub.com/voice_ai_logs" \
--H "Content-Type: application/json" \
--d '{"company_id": "your company id"}'
+curl -X GET https://api.openllmhub.com/voice_ai/voice_ai_logs \
+-H "Authorization: Bearer your_access_token" \
+-d 'page=1&limit=10&agent_id=optional_agent_id'
 ```
 
 ### Python 
@@ -95,12 +83,19 @@ curl -X GET "https://api.openllmhub.com/voice_ai_logs" \
 ```python
 import requests
 
-url = "https://api.openllmhub.com/voice_ai_logs"
-data = {
-    "company_id": "your company id"
+url = "https://api.openllmhub.com/voice_ai/voice_ai_logs"
+
+headers = {
+    'Authorization': 'Bearer your_access_token'  # Replace with your actual token if required
 }
 
-response = requests.get(url, json=data)
+params = {
+    'page': 1,
+    'limit': 10,
+    'agent_id': 'optional_agent_id'  # Replace with a valid agent ID if needed
+}
+
+response = requests.get(url, headers=headers, params=params)
 
 print(response.json())
 ```

@@ -6,9 +6,9 @@ openapi: 'GET /agents'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/agents`
+- **URL**: `https://api.openllmhub.com/voice_ai/agents`
 - **Method**: `GET`
-- **`company_id` required**
+- **API KEY** `required`
 
 ## Response
 
@@ -57,7 +57,7 @@ openapi: 'GET /agents'
 ### cURL
 
 ```bash
-curl -X GET 'https://api.openllmhub.com/agents' \
+curl -X GET 'https://api.openllmhub.com/voice_ai/agents' \
 -H "Content-Type: application/json" \
 -d '{"company_id": "your company id"}'
 ```
@@ -67,7 +67,7 @@ curl -X GET 'https://api.openllmhub.com/agents' \
 ```python
 import requests
 
-url = "https://api.openllmhub.com/agents"
+url = "https://api.openllmhub.com/voice_ai/agents"
 data = {
     "company_id": "your company id"
 }

@@ -6,7 +6,7 @@ openapi: 'DELETE /agents/{agent_id}'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/agents/<agent_id>`
+- **URL**: `https://api.openllmhub.com/voice_ai/agents/<agent_id>`
 - **Method**: `DELETE`
 
 ## Path Parameters
@@ -50,7 +50,7 @@ openapi: 'DELETE /agents/{agent_id}'
 ### cURL
 
 ```bash
-curl -X DELETE 'https://api.openllmhub.com/agents/<your-agent-id>'
+curl -X DELETE 'https://api.openllmhub.com/voice_ai/agents/{your-agent-id}'
 ```
 
 ### Python 
@@ -58,7 +58,7 @@ curl -X DELETE 'https://api.openllmhub.com/agents/<your-agent-id>'
 ```python
 import requests
 
-url = "https://api.openllmhub.com/agents/your-agent-id"
+url = "https://api.openllmhub.com/voice_ai/agents/{your-agent-id}"
 
 response = requests.delete(url)
 

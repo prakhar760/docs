@@ -6,8 +6,9 @@ openapi: 'POST /create_phone_call'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/create_phone_call`
+- **URL**: `https://api.openllmhub.com/voice_ai/create_phone_call`
 - **Method**: `POST`
+- **API KEY** `required`
 
 ## Request Body
 
@@ -71,18 +72,19 @@ Each object in the `callee_data` array should include:
 ### cURL
 
 ```bash
-curl -X POST 'https://api.openllmhub.com/create_phone_call' \
+curl -X POST 'https://api.openllmhub.com/voice_ai/create_phone_call' \
 -H 'Content-Type: application/json' \
+-H "Authorization: Bearer your_access_token" \
 -d '{
-  "agent_id": "your-agent-id",
-  "callee_data": [
-    {
-      "to_number": "+1234567890",
-      "name": "John Doe",
-      "country": "India"
-    },
-  ///...
-  ]
+    "agent_id": "your_agent_id",
+    "callee_data": [
+        {
+            "to_number": "+1234567890",
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+            # Add other required fields as per your dynamic variables
+        }
+    ]
 }'
 ```
 ### Python
@@ -91,23 +93,31 @@ curl -X POST 'https://api.openllmhub.com/create_phone_call' \
 import requests
 import json
 
-url = "https://api.openllmhub.com/create_phone_call"
+url = "https://api.openllmhub.com/voice_ai/create_phone_call"
 
-payload = json.dumps({
-  "agent_id": "your-agent-id",
-  "callee_data": [
-    {
-      "to_number": "+1234567890",
-      "name": "John Doe",
-      "country": "India"
-    }
-  ]
-})
+# Define the headers, including the authorization token if needed
 headers = {
-  'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_access_token'  # Replace with your actual token
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
+# Define the JSON payload
+payload = {
+    'agent_id': 'your_agent_id',  # Replace with a valid agent ID
+    'callee_data': [
+        {
+            'to_number': '+1234567890',
+            'name': 'John Doe',
+            'email': 'john.doe@example.com'
+            # Add other required fields as per your dynamic variables
+        }
+    ]
+}
 
-print(response.text)
+# Send the POST request
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+
+# Print the response status and data
+print('Status Code:', response.status_code)
+print('Response Data:', response.json())
 ```

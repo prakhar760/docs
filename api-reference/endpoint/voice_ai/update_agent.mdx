@@ -6,7 +6,7 @@ openapi: 'PATCH /update_agent/{agent_id}'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/update_agent/{agent_id}`
+- **URL**: `https://api.openllmhub.com/voice_ai/update_agent/{agent_id}`
 - **Method**: `PATCH`
 
 ## Path Parameters
@@ -92,7 +92,7 @@ Can include any of the following fields:
 
 ### cURL
 ```bash
-curl -X PATCH 'https://api.openllmhub.com/update_agent/your-agent-id' \
+curl -X PATCH 'https://api.openllmhub.com/voice_ai/update_agent/{your-agent-id}' \
 -H 'Content-Type: application/json' \
 -d '{
   "agent_name": "Updated Agent Name",
@@ -113,7 +113,13 @@ curl -X PATCH 'https://api.openllmhub.com/update_agent/your-agent-id' \
 import requests
 import json
 
-url = "https://api.openllmhub.com/update_agent/your-agent-id"
+agent_id = 'your_agent_id'
+url = "https://api.openllmhub.com/voice_ai/update_agent/{your-agent-id}"
+
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_access_token'  # Replace with your actual token if required
+}
 
 payload = json.dumps({
   "agent_name": "Updated Agent Name",
@@ -132,7 +138,7 @@ headers = {
   'Content-Type': 'application/json'
 }
 
-response = requests.request("PATCH", url, headers=headers, data=payload)
+response = requests.patch(url, headers=headers, data=json.dumps(payload))
 
 print(response.text)
 ```

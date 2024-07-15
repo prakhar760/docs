@@ -6,9 +6,10 @@ openapi: 'GET /agent/{agent_id}'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/agent/{agent_id}`
+- **URL**: `https://api.openllmhub.com/voice_ai/agent/{agent_id}`
 - **Method**: `GET`
 - **`agent_id` required**
+- **API KEY** `required`
 
 ## Path Parameters
 
@@ -63,16 +64,27 @@ openapi: 'GET /agent/{agent_id}'
 ### cURL
 
 ```bash
-curl -X GET 'https://api.openllmhub.com/agent/your-agent-id'
+curl -X GET https://api.openllmhub.com/voice_ai/agent/{your_agent_id} \
+-H "Authorization: Bearer your_access_token"
 ```
 ### Python
 
 ```python
 import requests
 
-url = "https://api.openllmhub.com/agent/your-agent-id"
+# Define the URL for the endpoint
+agent_id = 'your_agent_id'  # Replace with a valid agent ID
+url = f'https://api.openllmhub.com/voice_ai/agent/{agent_id}'  # Adjust the URL based on your Flask app's running address and port
 
-response = requests.get(url)
+# Define the headers, including the authorization token if needed
+headers = {
+    'Authorization': 'Bearer your_access_token'  # Replace with your actual token if required
+}
 
-print(response.json())
+# Send the GET request
+response = requests.get(url, headers=headers)
+
+# Print the response status and data
+print('Status Code:', response.status_code)
+print('Response Data:', response.json())
 ```

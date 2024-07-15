@@ -6,9 +6,9 @@ openapi: 'POST /create_voice_agent'
 
 ## API Details
 
-- **URL**: `https://api.openllmhub.com/create_voice_agent`
+- **URL**: `https://api.openllmhub.com/voice_ai/create_voice_agent`
 - **Method**: `POST`
-- **`company_id` required**
+- **API Token** `required`
 
 ## Request Body
 
@@ -64,8 +64,9 @@ The request body should be in JSON format. All fields are optional except for `a
 ### cURL
 
 ```bash
-curl -X POST 'https://api.openllmhub.com/create_voice_agent' \
--H 'Content-Type: application/json' \
+curl -X POST https://api.openllmhub.com/voice_ai/create_voice_agent \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer your_access_token" \
 -d '{
   "company_id": "companyid",
   "agent_name": "Agent Name",
@@ -81,7 +82,12 @@ curl -X POST 'https://api.openllmhub.com/create_voice_agent' \
 import requests
 import json
 
-url = "https://api.openllmhub.com/create_voice_agent"
+url = "https://api.openllmhub.com/voice_ai/create_voice_agent"
+
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_access_token' 
+}
 
 payload = json.dumps({
   "company_id": "companyid",
