@@ -8,7 +8,7 @@ openapi: 'POST /create_voice_agent'
 
 - **URL**: `https://api.openllmhub.com/voice_ai/create_voice_agent`
 - **Method**: `POST`
-- **API Token** `required`
+- **Auth Required**
 
 ## Request Body
 
@@ -16,7 +16,6 @@ The request body should be in JSON format. All fields are optional except for `a
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `company_id` | string | - | Your company ID |
 | `provider` | string | 'retell' | The provider for the voice agent |
 | `agent_name` | string | - | Name of the agent (Required) |
 | `prompt` | string | (see notes) | The prompt for the AI |
@@ -68,7 +67,6 @@ curl -X POST https://api.openllmhub.com/voice_ai/create_voice_agent \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer your_access_token" \
 -d '{
-  "company_id": "companyid",
   "agent_name": "Agent Name",
   "prompt": "You are Nancy, an AI Agent",
   "llmmodel": "gpt-3.5-turbo",
