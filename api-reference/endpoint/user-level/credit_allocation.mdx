@@ -1,0 +1,88 @@
+---
+title: 'Get Credit Allocation Logs'
+description: 'Endpoint to retrieve credit allocation logs for a company'
+openapi: 'GET /get_credit_allocation_logs'
+---
+
+## API Details
+
+- **URL**: `/get_credit_allocation_logs`
+- **Method**: `GET`
+- **Auth Required**: Yes (Bearer token or API key)
+
+## Request Headers
+
+The request must include an `Authorization` header with a valid token or API key.
+
+| Header           | Type   | Required | Description                            |
+|------------------|--------|----------|----------------------------------------|
+| `Authorization`  | string | Yes      | Bearer token or API key for authorization |
+
+## Responses
+
+### Success Response
+
+- **Code**: 200
+- **Content**:
+```json
+[
+  {
+    "log_id": "string",
+    "company_id": "string",
+    "credits_allocated": "number",
+    "current_balance": "number",
+    "created_at": "string"
+  }
+]
+
+
+
+### Error Response
+
+
+- **Code**: 404
+- **Content**: 
+```json
+{
+  "error": "No credit allocation logs found for company id {company_id}"
+}
+
+
+```
+- **Code**: 500
+- **Content**:
+```json
+{
+  "error": "Error message description"
+}
+
+
+```
+
+### cURL
+
+```bash
+curl -X GET 'https://your-api-url.com/get_credit_allocation_logs' \
+-H 'Authorization: Bearer your-token'
+
+
+
+```
+
+### Python 
+
+```python
+import requests
+
+url = "https://your-api-url.com/get_credit_allocation_logs"
+headers = {
+  'Authorization': 'Bearer your-token'
+}
+
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+
+
+
+```

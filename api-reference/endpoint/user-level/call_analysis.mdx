@@ -1,12 +1,12 @@
 ---
 title: 'Call Analysis'
 description: 'Endpoint to upload audio files or URLs for call analysis and receive task details'
-openapi: 'POST https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis'
+openapi: 'POST https://api.openllmhub.com/analysis_routes/call_analysis'
 ---
 
 ## API Details
 
-- **URL**: `https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis`
+- **URL**: `https://api.openllmhub.com/analysis_routes/call_analysis`
 - **Method**: `POST`
 - **Auth Required**: No
 
@@ -81,7 +81,7 @@ The request must include the following form data and files:
 ### cURL
 
 ```bash
-curl -X POST 'https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis' \
+curl -X POST 'https://api.openllmhub.com/analysis_routes/call_analysis' \
 -H 'Content-Type: multipart/form-data' \
 -F 'agent_id=12345' \
 -F 'audio_files=@File1.mp3' \
@@ -98,7 +98,7 @@ curl -X POST 'https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analy
 ```python
 import requests
 
-url = "https://ai-call-progression-analysis-woiveba7pq-as.a.run.app/analysis_routes/call_analysis"
+url = "https://api.openllmhub.com/analysis_routes/call_analysis"
 files = {
   'audio_files': ('File1.mp3', open('File1.mp3', 'rb')),
   'audio_files': ('File2.mp3', open('File2.mp3', 'rb'))

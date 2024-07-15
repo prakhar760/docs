@@ -35,16 +35,16 @@
     {
       "group": "Call Analysis",
       "pages": [
-        "api-reference/endpoint/user-level/add_company",
+        
         "api-reference/endpoint/user-level/add_agent",
         "api-reference/endpoint/user-level/edit_agent",
         "api-reference/endpoint/user-level/get_agents",
         "api-reference/endpoint/user-level/agent_details",
         "api-reference/endpoint/user-level/execution_logs",
         "api-reference/endpoint/user-level/agents_execution_log",
-        "api-reference/endpoint/user-level/api_key",
-        "api-reference/endpoint/user-level/get_api_key",
-        "api-reference/endpoint/user-level/call_analysis"
+        "api-reference/endpoint/user-level/call_analysis",
+        "api-reference/endpoint/user-level/credit_allocation"
+
       ]
     },
     {
